@@ -10,6 +10,7 @@ let flaggedQuestions = [];
 let participantName = "";
 let examDuration = 90 * 60; // 90 menit
 let timerInterval = null;
+let warningCount = 0;
 
 // ================================
 // ELEMENTS
@@ -43,7 +44,6 @@ const confirmFinish = document.getElementById("confirmFinish");
 const cancelFinish = document.getElementById("cancelFinish");
 const backToLoginBtn =
     document.getElementById("backToLoginBtn");
-const exitBtn = document.getElementById("exitBtn");
 
 // ================================
 // LOAD SOAL
@@ -73,6 +73,8 @@ loginForm.addEventListener("submit", function(e){
 
     e.preventDefault();
 
+    warningCount = 0;
+
     participantName =
         document.getElementById("namaPeserta").value.trim();
 
@@ -85,10 +87,14 @@ loginForm.addEventListener("submit", function(e){
 
     loginPage.classList.add("hidden");
     examPage.classList.remove("hidden");
-
+    
+    enterFullscreen();
+  
     createQuestionNumbers();
     loadQuestion();
-
+  
+    timerElement.textContent = "90:00";
+    
     startTimer();
 
 });
@@ -222,7 +228,6 @@ function loadQuestion(){
 
     updateProgress();
     updateNumberStatus();
-
 }
 
 // ================================
@@ -380,6 +385,12 @@ confirmFinish.addEventListener("click", ()=>{
 
 function finishExam(){
 
+    clearInterval(timerInterval);
+
+    if(document.fullscreenElement){
+        document.exitFullscreen();
+    }
+
     finishModal.classList.add("hidden");
 
     examPage.classList.add("hidden");
@@ -441,6 +452,8 @@ function finishExam(){
 
 backToLoginBtn.addEventListener("click", ()=>{
 
+    warningCount = 0;
+
     clearInterval(timerInterval);
 
     currentQuestion = 0;
@@ -460,6 +473,33 @@ backToLoginBtn.addEventListener("click", ()=>{
 
     resultPage.classList.add("hidden");
     loginPage.classList.remove("hidden");
+
+});
+
+document.addEventListener("visibilitychange", ()=>{
+
+    if(
+        document.hidden &&
+        !examPage.classList.contains("hidden")
+    ){
+
+        warningCount++;
+
+        alert(
+            `Peringatan ${warningCount}: Anda meninggalkan halaman ujian!`
+        );
+
+        if(warningCount >= 3){
+
+            alert(
+                "Ujian diakhiri karena terlalu sering meninggalkan halaman."
+            );
+
+            finishExam();
+
+        }
+
+    }
 
 });
 
@@ -485,12 +525,67 @@ window.addEventListener(
     }
 );
 
-// ================================
-// EXIT
-// ================================
+function enterFullscreen(){
 
-exitBtn.addEventListener("click", ()=>{
+    const elem = document.documentElement;
 
-    location.reload();
+    if(elem.requestFullscreen){
+        elem.requestFullscreen()
+            .catch(()=>{});
+    }
 
-});
+}
+
+document.addEventListener(
+    "contextmenu",
+    function(e){
+
+        e.preventDefault();
+
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && e.key === "I") ||
+            (e.ctrlKey && e.shiftKey && e.key === "J") ||
+            (e.ctrlKey && e.key === "U")
+        ){
+
+            e.preventDefault();
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "fullscreenchange",
+    ()=>{
+
+        if(
+            !document.fullscreenElement &&
+            !resultPage.classList.contains("hidden")
+        ){
+            return;
+        }
+
+        if(
+            !document.fullscreenElement &&
+            !examPage.classList.contains("hidden")
+        ){
+
+            alert(
+                "Anda keluar dari mode fullscreen!"
+            );
+
+            finishExam();
+
+        }
+
+    }
+);
