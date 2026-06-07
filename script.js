@@ -164,8 +164,20 @@ function loadQuestion(){
     questionCounter.textContent =
         `Soal ${currentQuestion + 1} dari ${questions.length}`;
 
-    questionText.textContent =
-        q.question;
+    let imageHtml = "";
+
+        if (q.image) {
+            imageHtml = `
+                <img
+                    src="${q.image}"
+                    class="question-image"
+                    alt="Gambar Soal">
+            `;
+        }
+        
+        questionText.innerHTML =
+            imageHtml +
+            `<div>${q.question}</div>`;
 
     optionsContainer.innerHTML = "";
 
