@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CBT SKB IPS SMP</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- LOGIN PAGE -->
+    <section id="login-page">
+
+        <div class="login-card">
+
+            <div class="login-header">
+                <h1>CBT SKB IPS SMP</h1>
+                <p>Computer Based Test</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label>Nama Peserta</label>
+                    <input
+                        type="text"
+                        id="namaPeserta"
+                        placeholder="Masukkan Nama Peserta"
+                        required>
+                </div>
+
+                <button type="submit" class="btn-start">
+                    Mulai Ujian
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- EXAM PAGE -->
+    <section id="exam-page" class="hidden">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="brand">
+
+                <h2>CBT SKB IPS SMP</h2>
+
+                <span>
+                    Simulasi Tes IPS SMP
+                </span>
+
+            </div>
+
+            <div class="exam-info">
+
+                <div class="info-box">
+                    <span>Peserta</span>
+                    <strong id="displayNama">
+                        -
+                    </strong>
+                </div>
+
+                <div class="info-box timer-box">
+
+                    <span>Sisa Waktu</span>
+
+                    <strong id="timer">
+                        90:00
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="main-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+
+                <div class="legend">
+
+                    <h3>Status Soal</h3>
+
+                    <div class="legend-item">
+                        <span class="box answered"></span>
+                        Sudah Dijawab
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="box flagged"></span>
+                        Ragu-ragu
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="box unanswered"></span>
+                        Belum Dijawab
+                    </div>
+
+                </div>
+
+                <div id="questionNumbers"
+                     class="question-grid">
+                </div>
+
+            </aside>
+
+
+            <!-- CONTENT -->
+            <main class="content">
+
+                <div class="question-header">
+
+                    <div>
+
+                        <h3 id="questionCounter">
+                            Soal 1 dari 84
+                        </h3>
+
+                    </div>
+
+                    <div class="progress-wrapper">
+
+                        <div class="progress-bar">
+
+                            <div id="progressFill"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="question-card">
+
+                    <h2 id="questionText">
+                        Memuat soal...
+                    </h2>
+
+                    <div id="optionsContainer"
+                         class="options-container">
+
+                    </div>
+
+                </div>
+
+
+                <div class="navigation">
+
+                    <button id="prevBtn"
+                            class="btn-secondary">
+
+                        ← Sebelumnya
+
+                    </button>
+
+                    <button id="flagBtn"
+                            class="btn-warning">
+
+                        Tandai Ragu-ragu
+
+                    </button>
+
+                    <button id="nextBtn"
+                            class="btn-primary">
+
+                        Berikutnya →
+
+                    </button>
+
+                </div>
+
+
+                <div class="finish-wrapper">
+
+                    <button id="finishBtn"
+                            class="btn-finish">
+
+                        Selesaikan Ujian
+
+                    </button>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </section>
+
+
+    <!-- MODAL FINISH -->
+    <div id="finishModal"
+         class="modal hidden">
+
+        <div class="modal-content">
+
+            <h2>Konfirmasi</h2>
+
+            <p>
+                Apakah Anda yakin ingin mengakhiri ujian?
+            </p>
+
+            <div class="modal-actions">
+
+                <button id="cancelFinish"
+                        class="btn-secondary">
+
+                    Batal
+
+                </button>
+
+                <button id="confirmFinish"
+                        class="btn-finish">
+
+                    Ya, Selesai
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULT PAGE -->
+    <section id="result-page"
+             class="hidden">
+
+        <div class="result-card">
+
+            <h1>HASIL UJIAN</h1>
+
+            <div class="score-box">
+
+                <div class="score-item">
+
+                    <span>Nama</span>
+
+                    <strong id="resultNama">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="score-item">
+
+                    <span>Benar</span>
+
+                    <strong id="resultBenar">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="score-item">
+
+                    <span>Salah</span>
+
+                    <strong id="resultSalah">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="score-item">
+
+                    <span>Nilai</span>
+
+                    <strong id="resultNilai">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <h2 class="review-title">
+                Review Jawaban
+            </h2>
+
+            <div id="reviewContainer">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
