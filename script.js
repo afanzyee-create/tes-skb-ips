@@ -40,6 +40,7 @@ const finishBtn = document.getElementById("finishBtn");
 const finishModal = document.getElementById("finishModal");
 const confirmFinish = document.getElementById("confirmFinish");
 const cancelFinish = document.getElementById("cancelFinish");
+const exitBtn = document.getElementById("exitBtn");
 
 // ================================
 // LOAD SOAL
@@ -495,3 +496,13 @@ window.addEventListener(
 
     }
 );
+
+// ================================
+// EXIT
+// ================================
+
+exitBtn.addEventListener("click", ()=>{
+
+    location.reload();
+
+});
