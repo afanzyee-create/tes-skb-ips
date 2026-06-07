@@ -41,6 +41,8 @@ const finishBtn = document.getElementById("finishBtn");
 const finishModal = document.getElementById("finishModal");
 const confirmFinish = document.getElementById("confirmFinish");
 const cancelFinish = document.getElementById("cancelFinish");
+const backToLoginBtn =
+    document.getElementById("backToLoginBtn");
 const exitBtn = document.getElementById("exitBtn");
 
 // ================================
