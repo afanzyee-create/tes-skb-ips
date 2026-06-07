@@ -506,3 +506,18 @@ button{
         justify-content:space-between;
     }
 }
+
+.question-image{
+    display:block;
+    max-width:100%;
+    max-height:400px;
+    margin:0 auto 20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+#questionText{
+    font-size:20px;
+    line-height:1.6;
+    margin-bottom:25px;
+}
