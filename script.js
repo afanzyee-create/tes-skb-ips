@@ -416,6 +416,21 @@ function finishExam(){
     document.getElementById("resultNilai")
         .textContent = score;
 
+    const statusElement =
+    document.getElementById("resultStatus");
+
+        if(score >= 70){
+        
+            statusElement.textContent = "LULUS";
+            statusElement.className = "status-lulus";
+        
+        }else{
+        
+            statusElement.textContent = "BELUM LULUS";
+            statusElement.className = "status-tidak-lulus";
+        
+        }
+
     // generateReview();
 
 }
