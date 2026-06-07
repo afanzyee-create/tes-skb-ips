@@ -9,6 +9,7 @@ let flaggedQuestions = [];
 
 let participantName = "";
 let examDuration = 90 * 60; // 90 menit
+let timerInterval = null;
 
 // ================================
 // ELEMENTS
@@ -315,38 +316,38 @@ flagBtn.addEventListener("click", ()=>{
 
 function startTimer(){
 
-    const interval =
-        setInterval(()=>{
+    clearInterval(timerInterval);
 
-            examDuration--;
+    timerInterval = setInterval(()=>{
 
-            let minutes =
-                Math.floor(examDuration / 60);
+        examDuration--;
 
-            let seconds =
-                examDuration % 60;
+        let minutes =
+            Math.floor(examDuration / 60);
 
-            timerElement.textContent =
-                `${minutes}:${seconds
-                .toString()
-                .padStart(2,"0")}`;
+        let seconds =
+            examDuration % 60;
 
-            if(examDuration <= 0){
+        timerElement.textContent =
+            `${minutes}:${seconds
+            .toString()
+            .padStart(2,"0")}`;
 
-                clearInterval(interval);
+        if(examDuration <= 0){
 
-                alert(
-                    "Waktu habis. Ujian selesai."
-                );
+            clearInterval(timerInterval);
 
-                finishExam();
+            alert(
+                "Waktu habis. Ujian selesai."
+            );
 
-            }
+            finishExam();
 
-        },1000);
+        }
+
+    },1000);
 
 }
-
 // ================================
 // FINISH MODAL
 // ================================
@@ -474,6 +475,34 @@ function generateReview(){
     });
 
 }
+
+// ================================
+// KEMBALI KE LOGIN
+// ================================
+
+backToLoginBtn.addEventListener("click", ()=>{
+
+    clearInterval(timerInterval);
+
+    currentQuestion = 0;
+    userAnswers = [];
+    flaggedQuestions = [];
+
+    participantName = "";
+
+    examDuration = 90 * 60;
+
+    document.getElementById("namaPeserta").value = "";
+    displayNama.textContent = "-";
+    timerElement.textContent = "90:00";
+
+    questionNumbers.innerHTML = "";
+    progressFill.style.width = "0%";
+
+    resultPage.classList.add("hidden");
+    loginPage.classList.remove("hidden");
+
+});
 
 // ================================
 // ANTI REFRESH
