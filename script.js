@@ -416,65 +416,7 @@ function finishExam(){
     document.getElementById("resultNilai")
         .textContent = score;
 
-    generateReview();
-
-}
-
-// ================================
-// REVIEW
-// ================================
-
-function generateReview(){
-
-    const reviewContainer =
-        document.getElementById("reviewContainer");
-
-    reviewContainer.innerHTML = "";
-
-    questions.forEach((q,index)=>{
-
-        const div =
-            document.createElement("div");
-
-        div.style.border =
-            "1px solid #ddd";
-
-        div.style.padding =
-            "15px";
-
-        div.style.marginBottom =
-            "15px";
-
-        div.style.borderRadius =
-            "10px";
-
-        let userAnswer =
-            userAnswers[index] !== undefined
-            ? q.options[userAnswers[index]]
-            : "Tidak Dijawab";
-
-        let correctAnswer =
-            q.options[q.answer];
-
-        div.innerHTML = `
-            <h4>
-                ${index + 1}. ${q.question}
-            </h4>
-
-            <p>
-                <strong>Jawaban Anda:</strong>
-                ${userAnswer}
-            </p>
-
-            <p>
-                <strong>Kunci Jawaban:</strong>
-                ${correctAnswer}
-            </p>
-        `;
-
-        reviewContainer.appendChild(div);
-
-    });
+    // generateReview();
 
 }
 
