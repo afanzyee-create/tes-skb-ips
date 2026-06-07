@@ -364,6 +364,8 @@ cancelFinish.addEventListener("click", ()=>{
 
 confirmFinish.addEventListener("click", ()=>{
 
+    finishModal.classList.add("hidden");
+
     finishExam();
 
 });
@@ -373,6 +375,8 @@ confirmFinish.addEventListener("click", ()=>{
 // ================================
 
 function finishExam(){
+
+    finishModal.classList.add("hidden");
 
     examPage.classList.add("hidden");
     resultPage.classList.remove("hidden");
